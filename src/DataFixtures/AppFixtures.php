@@ -8,17 +8,29 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * L'encodeur de mot de pass
+     * @var UserPasswordEncoderInterface
+    */
+    /*
+    private $encoder;
+
+    public function __constructor(UserPasswordEncoderInterface $encoder){
+        $this->encoder=$encoder;
+    }
+    */
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
 
-        $chrono = 1;
-
         for ($u=0; $u < 10; $u++) {
             $user = new User();
+            $chrono = 1;
+            //$hash = $this->encoder->encodePassword($user,"0000");
             $user->setFirstName($faker->firstName())
                      ->setLastName($faker->lastName())
                      ->setEmail($faker->email())
